@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% if user.is_authenticated %}
+{% block contenido %}
+<div class="creditCardForm">
+    <div class="heading">
+        <h1>Realizar nuevo Pago</h1>
+    </div>
+    <div class="payment">
+        {% if form.errors%}
+            <div class = "alert alert-danger" role ="alert">El formulario contiene errores </div>
+        {% endif %}
+        <form action = "{% url 'guardarpago'%}" method = "POST">
+            {% csrf_token %}
+            {% if mensaje == 'OK' %}
+                <div class = "alert alert-success" role ="alert">!Pago realizado con Exito!</div>
+            {% endif %}
+            {% if mensaje == 'fondos insuficientes' %}
+                <div class = "alert alert-danger" role ="alert">Pago rechazado: Fondos Insuficientes</div>
+            {% endif %}
+            {% if mensaje == 'Tarjeta inactiva' %}
+                <div class = "alert alert-danger" role ="alert">Pago rechazado: Tarjeta Inactiva </div>
+            {% endif %}
+            {% if mensaje == 'cuota' %}
+                <div class = "alert alert-danger" role ="alert">Pago rechazado: Tarjeta debito no puede tener cuota > 1 </div>
+            {% endif %}Tarjeta inactiva
+
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-primary" >Registrar</button>
+            
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% else %}
+    <h1>No tienes acceso a esta pagina puedes logearte <a href='{% url "login" %}' >Aqui</a></a><h1> 
+{% endif %}

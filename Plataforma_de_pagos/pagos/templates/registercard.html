@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% if user.is_authenticated %}
+{% block contenido %}
+<div class="creditCardForm">
+    <div class="heading">
+        <h1>Registrar Nueva Tarjeta de Credito</h1>
+    </div>
+    <div class="payment">
+        {% if form.errors%}
+            <div class = "alert alert-danger" role ="alert">El formulario contiene errores </div>
+        {% endif %}
+        <form action = "{% url 'guardartarjeta'%}" method = "POST">
+            {% csrf_token %}
+            {% if mensaje %}
+                <div class = "alert alert-success" role ="alert">Tarjeta Regsitrada con exito </div>
+            {% endif %}
+            {{ form }}
+            <button type="submit" class="btn btn-primary" >Registrar</button>
+            
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% else %}
+    <h1>No tienes acceso a esta pagina puedes logearte <a href='{% url "login" %}' >Aqui</a></a><h1> 
+{% endif %}

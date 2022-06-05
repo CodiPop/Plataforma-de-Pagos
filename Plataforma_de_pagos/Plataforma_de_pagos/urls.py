@@ -17,11 +17,19 @@ from django.contrib import admin
 from django.urls import path
 from pagos.views import *
 from django.contrib.auth.views import LoginView,LogoutView
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('', inicio, name='index'),
     path('admin/', admin.site.urls),
     path('registrarse/', registrarse, name='registro'),
-    path('login/', LoginView.as_view(template_name='pages-login.html'), name='login'),
+    path('login/', LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name='logout.html'), name='logout'),
+    path('tarjetas/',cards,name='tarjetas'),
+    path('pse_registro/',creartarjetapse,name='tarjetaspse'),
+    path('registrartarjeta/',creartarjeta,name='guardartarjeta'),
+    path('registrarpago/',crearpago,name='guardarpago'),
+    path('transacciones/',transacciones,name='vertransacciones'),
 ]
+
+urlpatterns += staticfiles_urlpatterns()

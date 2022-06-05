@@ -38,7 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pagos',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -72,13 +75,13 @@ WSGI_APPLICATION = 'Plataforma_de_pagos.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+# https://docs.djansrc static image djangogoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'Pagos',
-        'USER': 'admin',
+        'NAME': 'Pagos_Online',
+        'USER': 'postgres',
         'PASSWORD': 'clave8375',
         'HOST': 'localhost',
         'DATABASE_PORT': 5432,

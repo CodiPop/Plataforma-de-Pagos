@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% if user.is_authenticated %}
+{% block contenido %}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Historial de transacciones</h1>
+    <a href="{% url 'guardarpago' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary">Realizar Pago</a>
+</div>
+
+<!-- Page Heading -->
+{% for ani in formulario %}
+    {% if ani.estado == True %}
+        <div  class="factura border-bottom-success shadow h-100 py-2">
+            
+                <label>Transaccion ID: </label> 
+                {{ ani.idtransaccion }}
+                <label>Monto $:</label> {{ ani.monto }}
+            
+                <label>Fecha:</label>
+                {{ ani.fecha }}
+                <label>Hora: </label> {{ ani.hora }} 
+                <br>
+                <img src="{% static 'img/aprobado.png' %}" class="logo-factura"> 
+            
+            
+                                    
+        </div>
+    {%else%}
+        <div  class="factura border-bottom-danger shadow h-100 py-2">
+                
+            <label>Transaccion ID: </label> 
+            {{ ani.idtransaccion }}
+            <label>Monto $:</label> {{ ani.monto }}
+        
+            <label>Fecha:</label>
+            {{ ani.fecha }}
+            <label>Hora: </label> {{ ani.hora }} 
+            <br>
+            <img src="{% static 'img/rechazado.png' %}" class="logo-factura"> 
+        
+        
+                                
+        </div>
+    {% endif %}
+    <br>
+    <br>
+
+{% endfor %}
+{% endblock %}
+{% else %}
+    <h1>No tienes acceso a esta pagina puedes logearte <a href='{% url "login" %}' >Aqui</a></a><h1> 
+{% endif %}
